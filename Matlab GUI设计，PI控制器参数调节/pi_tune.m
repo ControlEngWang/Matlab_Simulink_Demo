@@ -55,8 +55,20 @@ function pi_tune_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for pi_tune
 handles.output = hObject;
 
+% initial parameters
+handles.param_P=1;
+handles.param_I=1;
+handles.num=[1];
+handles.den=[10 11 1];
+set(handles.edit_P,'String','1');
+set(handles.edit_I,'String','1');
+set(handles.slider_P,'Value',1);
+set(handles.slider_I,'Value',1);
+updatePlots(handles);
+
 % Update handles structure
 guidata(hObject, handles);
+
 
 % UIWAIT makes pi_tune wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
@@ -102,6 +114,11 @@ function slider_P_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+value=get(handles.slider_P,'Value');
+set(handles.edit_P,'String',num2str(value));
+handles.param_P=value;
+updatePlots(handles);
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -124,6 +141,11 @@ function slider_I_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+value=get(handles.slider_I,'Value');
+set(handles.edit_I,'String',num2str(value));
+handles.param_I=value;
+updatePlots(handles);
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -146,6 +168,11 @@ function edit_P_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit_P as text
 %        str2double(get(hObject,'String')) returns contents of edit_P as a double
+value=str2double(get(handles.edit_P,'String'));
+set(handles.slider_P,'Value',value);
+handles.param_P=value;
+updatePlots(handles);
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -169,6 +196,11 @@ function edit_I_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit_I as text
 %        str2double(get(hObject,'String')) returns contents of edit_I as a double
+value=str2double(get(handles.edit_I,'String'));
+set(handles.slider_I,'Value',value);
+handles.param_I=value;
+updatePlots(handles);
+guidata(hObject,handles);
 
 
 % --- Executes during object creation, after setting all properties.
@@ -190,7 +222,7 @@ function uibuttongroup1_SelectionChangedFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 if(get(handles.radiobutton_PI,'Value')==1)
-    set(handles.text3,'Visible','on');
+    set(handles.text3,'Visible','on'); 
     set(handles.slider_I,'Visible','on');
     set(handles.edit_I,'Visible','on');
 else
