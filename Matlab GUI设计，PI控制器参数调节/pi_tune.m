@@ -56,15 +56,15 @@ function pi_tune_OpeningFcn(hObject, eventdata, handles, varargin)
 handles.output = hObject;
 
 % initial parameters
-handles.param_P=1;
-handles.param_I=1;
-handles.num=[1];
-handles.den=[10 11 1];
 set(handles.edit_P,'String','1');
 set(handles.edit_I,'String','1');
 set(handles.slider_P,'Value',1);
 set(handles.slider_I,'Value',1);
-updatePlots(handles);
+
+handles.stepPlot=[];
+handles.gainPlot=[];
+handles.phasePlot=[];
+[handles.stepPlot, handles.gainPlot, handles.phasePlot]=updatePlots(handles);
 
 % Update handles structure
 guidata(hObject, handles);
@@ -117,7 +117,7 @@ function slider_P_Callback(hObject, eventdata, handles)
 value=get(handles.slider_P,'Value');
 set(handles.edit_P,'String',num2str(value));
 handles.param_P=value;
-updatePlots(handles);
+[handles.stepPlot, handles.gainPlot, handles.phasePlot]=updatePlots(handles);
 guidata(hObject,handles);
 
 
@@ -144,7 +144,7 @@ function slider_I_Callback(hObject, eventdata, handles)
 value=get(handles.slider_I,'Value');
 set(handles.edit_I,'String',num2str(value));
 handles.param_I=value;
-updatePlots(handles);
+[handles.stepPlot, handles.gainPlot, handles.phasePlot]=updatePlots(handles);
 guidata(hObject,handles);
 
 
@@ -171,7 +171,7 @@ function edit_P_Callback(hObject, eventdata, handles)
 value=str2double(get(handles.edit_P,'String'));
 set(handles.slider_P,'Value',value);
 handles.param_P=value;
-updatePlots(handles);
+[handles.stepPlot, handles.gainPlot, handles.phasePlot]=updatePlots(handles);
 guidata(hObject,handles);
 
 
@@ -199,7 +199,7 @@ function edit_I_Callback(hObject, eventdata, handles)
 value=str2double(get(handles.edit_I,'String'));
 set(handles.slider_I,'Value',value);
 handles.param_I=value;
-updatePlots(handles);
+[handles.stepPlot, handles.gainPlot, handles.phasePlot]=updatePlots(handles);
 guidata(hObject,handles);
 
 

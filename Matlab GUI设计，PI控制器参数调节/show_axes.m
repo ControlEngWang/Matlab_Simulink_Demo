@@ -12,12 +12,22 @@ freq_show=get(handles.checkbox_Freq,'Value');
 %% show or hide axes
 if(step_show==0)
     set(handles.axes_Step,'Visible','off');
+    
+    set(handles.stepPlot,'Visible','off');
 end
 if(freq_show==0)
     set(handles.axes_Freq_gain,'Visible','off');
     set(handles.axes_Freq_phase,'Visible','off');
+    
+    set(handles.gainPlot,'Visible','off');
+    set(handles.phasePlot,'Visible','off');
 end
 if(step_show==1 && freq_show==1)
+    
+    set(handles.stepPlot,'Visible','on');
+    set(handles.gainPlot,'Visible','on');
+    set(handles.phasePlot,'Visible','on');
+    
     set(handles.axes_Step,'Visible','on');
     set(handles.axes_Freq_gain,'Visible','on');
     set(handles.axes_Freq_phase,'Visible','on');
@@ -35,12 +45,17 @@ if(step_show==1 && freq_show==1)
     set(handles.axes_Freq_phase,'Position',pos);
 else
     if(step_show==1)
+         set(handles.stepPlot,'Visible','on');
+         
         set(handles.axes_Step,'Visible','on');
         pos=get(handles.axes_Step,'Position');
         pos(3)=117;
         set(handles.axes_Step,'Position',pos);
     else
         if(freq_show==1)
+            set(handles.gainPlot,'Visible','on');
+            set(handles.phasePlot,'Visible','on');
+            
             set(handles.axes_Freq_gain,'Visible','on');
             set(handles.axes_Freq_phase,'Visible','on');
             
